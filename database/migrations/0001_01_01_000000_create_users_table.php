@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('name')->comment('Full name of the user');
             $table->string('remember_token')->nullable()->comment('Token used for remember-me sessions');
             $table->timestamp('email_verified_at')->nullable()->comment('Timestamp for when the email was verified');
-            $table->timestamp('registration_date')->comment('Timestamp when the user registered');
+            $table->timestamp('registration_date')->useCurrent()->comment('Timestamp when the user registered');
             $table->timestamp('last_login_date')->nullable()->comment('Timestamp of the user\'s last login');
+            $table->timestamps();
         });
 
 
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      */
     public function down(): void

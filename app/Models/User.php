@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +23,25 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    // A user can have multiple roles (Many-to-Many)
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    // A user can have many posts
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    // A user can make many comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+            
 
     /**
      * The attributes that should be hidden for serialization.
